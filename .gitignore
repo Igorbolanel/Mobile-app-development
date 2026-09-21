@@ -1,0 +1,14 @@
+.DS_Store
+.idea/
+.gradle/
+.kotlin/
+build/
+local.properties
+*.iml
+*.apk
+*.aab
+lab1-variant5/.gradle/
+lab1-variant5/.kotlin/
+lab1-variant5/build/
+lab1-variant5/app/build/
+lab1-variant5/local.properties
