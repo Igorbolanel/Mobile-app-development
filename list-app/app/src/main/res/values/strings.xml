@@ -17,4 +17,6 @@
     <string name="cancel">Cancel</string>
     <string name="task_deleted">Task deleted</string>
     <string name="undo">Undo</string>
+    <string name="search">Search</string>
+    <string name="nothing_found">Nothing found</string>
 </resources>
