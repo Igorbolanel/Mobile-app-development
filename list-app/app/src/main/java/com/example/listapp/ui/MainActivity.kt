@@ -1,5 +1,6 @@
 package com.example.listapp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -15,6 +16,7 @@ import com.example.listapp.data.Task
 import com.example.listapp.data.TaskDao
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -39,8 +41,10 @@ class MainActivity : AppCompatActivity() {
         taskCard = findViewById(R.id.taskCard)
         emptyText = findViewById(R.id.emptyText)
         val taskList = findViewById<RecyclerView>(R.id.taskList)
+        val addButton = findViewById<FloatingActionButton>(R.id.addButton)
 
         adapter = TaskAdapter(
+            onTaskClick = { task -> openTask(task) },
             onDoneClick = { task, isDone -> changeDone(task, isDone) }
         )
         taskList.adapter = adapter
@@ -48,6 +52,10 @@ class MainActivity : AppCompatActivity() {
         val divider = MaterialDividerItemDecoration(this, MaterialDividerItemDecoration.VERTICAL)
         divider.isLastItemDecorated = false
         taskList.addItemDecoration(divider)
+
+        addButton.setOnClickListener {
+            startActivity(Intent(this, TaskEditActivity::class.java))
+        }
     }
 
     override fun onResume() {
@@ -68,6 +76,12 @@ class MainActivity : AppCompatActivity() {
             taskCard.visibility = View.VISIBLE
             emptyText.visibility = View.GONE
         }
+    }
+
+    private fun openTask(task: Task) {
+        val intent = Intent(this, TaskEditActivity::class.java)
+        intent.putExtra(TaskEditActivity.EXTRA_TASK_ID, task.id)
+        startActivity(intent)
     }
 
     private fun changeDone(task: Task, isDone: Boolean) {

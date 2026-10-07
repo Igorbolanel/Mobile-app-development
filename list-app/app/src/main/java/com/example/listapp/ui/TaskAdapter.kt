@@ -16,6 +16,7 @@ import com.example.listapp.data.Task
 import com.example.listapp.domain.DeadlineChecker
 
 class TaskAdapter(
+    private val onTaskClick: (Task) -> Unit,
     private val onDoneClick: (Task, Boolean) -> Unit
 ) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
 
@@ -67,6 +68,10 @@ class TaskAdapter(
             } else {
                 holder.taskDeadline.setTextColor(ContextCompat.getColor(context, R.color.gray))
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            onTaskClick(task)
         }
 
         holder.doneCheck.setOnClickListener {
