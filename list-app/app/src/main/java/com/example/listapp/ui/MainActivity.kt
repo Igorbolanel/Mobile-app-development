@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
         taskList.adapter = adapter
 
         val divider = MaterialDividerItemDecoration(this, MaterialDividerItemDecoration.VERTICAL)
-        divider.isLastItemDecorated = false
         taskList.addItemDecoration(divider)
 
         val swipeCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {

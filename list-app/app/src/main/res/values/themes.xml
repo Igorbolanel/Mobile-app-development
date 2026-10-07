@@ -21,5 +21,9 @@
         <item name="separatorLineColor">@color/separator_light</item>
     </style>
 
-    <style name="Theme.ListApp" parent="Base.Theme.ListApp" />
+    <style name="Theme.ListApp" parent="Base.Theme.ListApp">
+        <item name="materialCardViewStyle">@style/Widget.ListApp.Card</item>
+        <item name="materialDividerStyle">@style/Widget.ListApp.Divider</item>
+        <item name="floatingActionButtonStyle">@style/Widget.ListApp.AddButton</item>
+    </style>
 </resources>
