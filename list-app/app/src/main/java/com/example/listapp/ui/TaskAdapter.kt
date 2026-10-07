@@ -50,10 +50,12 @@ class TaskAdapter(
         holder.doneCheck.isChecked = task.isDone
 
         if (task.isDone) {
-            holder.taskTitle.paintFlags = holder.taskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            holder.taskTitle.paintFlags =
+                holder.taskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             holder.taskTitle.setTextColor(ContextCompat.getColor(context, R.color.gray))
         } else {
-            holder.taskTitle.paintFlags = holder.taskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            holder.taskTitle.paintFlags =
+                holder.taskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             holder.taskTitle.setTextColor(holder.titleColor)
         }
 
@@ -61,8 +63,9 @@ class TaskAdapter(
         if (deadline == null) {
             holder.taskDeadline.visibility = View.GONE
         } else {
+            val date = DateFormatter.format(deadline)
             holder.taskDeadline.visibility = View.VISIBLE
-            holder.taskDeadline.text = context.getString(R.string.deadline_format, DateFormatter.format(deadline))
+            holder.taskDeadline.text = context.getString(R.string.deadline_format, date)
             if (!task.isDone && DeadlineChecker.isOverdue(deadline)) {
                 holder.taskDeadline.setTextColor(ContextCompat.getColor(context, R.color.red))
             } else {
