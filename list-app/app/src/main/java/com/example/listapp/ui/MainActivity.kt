@@ -1,6 +1,8 @@
 package com.example.listapp.ui
 
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -8,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
@@ -65,6 +68,9 @@ class MainActivity : AppCompatActivity() {
         val divider = MaterialDividerItemDecoration(this, MaterialDividerItemDecoration.VERTICAL)
         taskList.addItemDecoration(divider)
 
+        val deleteBackground = ColorDrawable(ContextCompat.getColor(this, R.color.red))
+        val deleteIcon = ContextCompat.getDrawable(this, R.drawable.ic_delete)
+
         val swipeCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -79,6 +85,52 @@ class MainActivity : AppCompatActivity() {
                 if (position != RecyclerView.NO_POSITION) {
                     deleteTask(adapter.currentList[position])
                 }
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                val itemView = viewHolder.itemView
+                if (dX < 0) {
+                    deleteBackground.setBounds(
+                        itemView.right + dX.toInt(),
+                        itemView.top,
+                        itemView.right,
+                        itemView.bottom
+                    )
+                    deleteBackground.draw(c)
+
+                    if (deleteIcon != null) {
+                        val margin = (itemView.height - deleteIcon.intrinsicHeight) / 2
+                        val iconTop = itemView.top + margin
+                        val iconRight = itemView.right - margin
+                        deleteIcon.setBounds(
+                            iconRight - deleteIcon.intrinsicWidth,
+                            iconTop,
+                            iconRight,
+                            iconTop + deleteIcon.intrinsicHeight
+                        )
+                        c.save()
+                        c.clipRect(deleteBackground.bounds)
+                        deleteIcon.draw(c)
+                        c.restore()
+                    }
+                }
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
             }
         }
         ItemTouchHelper(swipeCallback).attachToRecyclerView(taskList)
