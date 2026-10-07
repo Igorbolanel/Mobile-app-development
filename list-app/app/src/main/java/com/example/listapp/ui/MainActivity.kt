@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         emptyText = findViewById(R.id.emptyText)
         addButton = findViewById(R.id.addButton)
         val taskList = findViewById<RecyclerView>(R.id.taskList)
+        val settingsButton = findViewById<ImageButton>(R.id.settingsButton)
 
         adapter = TaskAdapter(
             onTaskClick = { task -> openTask(task) },
@@ -84,6 +86,10 @@ class MainActivity : AppCompatActivity() {
 
         searchInput.doAfterTextChanged {
             showTasks()
+        }
+
+        settingsButton.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
 
         addButton.setOnClickListener {
