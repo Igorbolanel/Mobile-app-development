@@ -15,4 +15,6 @@
     <string name="delete_question">Delete this task?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="task_deleted">Task deleted</string>
+    <string name="undo">Undo</string>
 </resources>
