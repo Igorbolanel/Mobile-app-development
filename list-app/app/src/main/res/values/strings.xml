@@ -2,4 +2,17 @@
     <string name="app_name">To-Do List</string>
     <string name="no_tasks">No tasks</string>
     <string name="deadline_format">Due: %1$s</string>
+    <string name="new_task">New task</string>
+    <string name="back">Back</string>
+    <string name="done">Done</string>
+    <string name="title_hint">Title</string>
+    <string name="note_hint">Note</string>
+    <string name="deadline">Deadline</string>
+    <string name="no_deadline">None</string>
+    <string name="remove_deadline">Remove deadline</string>
+    <string name="enter_title">Enter a title</string>
+    <string name="delete_task">Delete task</string>
+    <string name="delete_question">Delete this task?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
 </resources>
