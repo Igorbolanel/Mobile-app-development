@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listapp.R
 import com.example.listapp.data.AppDatabase
@@ -17,6 +18,7 @@ import com.example.listapp.data.TaskDao
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: TaskAdapter
     private lateinit var taskCard: MaterialCardView
     private lateinit var emptyText: TextView
+    private lateinit var addButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         taskCard = findViewById(R.id.taskCard)
         emptyText = findViewById(R.id.emptyText)
+        addButton = findViewById(R.id.addButton)
         val taskList = findViewById<RecyclerView>(R.id.taskList)
-        val addButton = findViewById<FloatingActionButton>(R.id.addButton)
 
         adapter = TaskAdapter(
             onTaskClick = { task -> openTask(task) },
@@ -52,6 +55,24 @@ class MainActivity : AppCompatActivity() {
         val divider = MaterialDividerItemDecoration(this, MaterialDividerItemDecoration.VERTICAL)
         divider.isLastItemDecorated = false
         taskList.addItemDecoration(divider)
+
+        val swipeCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    deleteTask(adapter.currentList[position])
+                }
+            }
+        }
+        ItemTouchHelper(swipeCallback).attachToRecyclerView(taskList)
 
         addButton.setOnClickListener {
             startActivity(Intent(this, TaskEditActivity::class.java))
@@ -87,6 +108,24 @@ class MainActivity : AppCompatActivity() {
     private fun changeDone(task: Task, isDone: Boolean) {
         lifecycleScope.launch {
             taskDao.update(task.copy(isDone = isDone))
+            loadTasks()
+        }
+    }
+
+    private fun deleteTask(task: Task) {
+        lifecycleScope.launch {
+            taskDao.delete(task)
+            loadTasks()
+            Snackbar.make(addButton, R.string.task_deleted, Snackbar.LENGTH_LONG)
+                .setAnchorView(addButton)
+                .setAction(R.string.undo) { restoreTask(task) }
+                .show()
+        }
+    }
+
+    private fun restoreTask(task: Task) {
+        lifecycleScope.launch {
+            taskDao.insert(task)
             loadTasks()
         }
     }
