@@ -91,4 +91,11 @@
         <item name="buttonTint">@null</item>
         <item name="useMaterialThemeColors">false</item>
     </style>
+
+    <style name="Animation.ListApp.Activity" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
 </resources>

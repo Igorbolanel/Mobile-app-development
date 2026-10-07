@@ -25,5 +25,6 @@
         <item name="materialCardViewStyle">@style/Widget.ListApp.Card</item>
         <item name="materialDividerStyle">@style/Widget.ListApp.Divider</item>
         <item name="floatingActionButtonStyle">@style/Widget.ListApp.AddButton</item>
+        <item name="android:windowAnimationStyle">@style/Animation.ListApp.Activity</item>
     </style>
 </resources>
