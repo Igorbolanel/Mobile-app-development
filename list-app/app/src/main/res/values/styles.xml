@@ -89,7 +89,6 @@
     <style name="Widget.ListApp.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
         <item name="buttonCompat">@drawable/checkbox_round</item>
         <item name="buttonTint">@null</item>
-        <item name="useMaterialThemeColors">false</item>
     </style>
 
     <style name="Animation.ListApp.Activity" parent="@android:style/Animation.Activity">
