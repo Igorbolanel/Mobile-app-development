@@ -108,18 +108,17 @@ class MainActivity : AppCompatActivity() {
 
                     if (deleteIcon != null) {
                         val margin = (itemView.height - deleteIcon.intrinsicHeight) / 2
-                        val iconTop = itemView.top + margin
-                        val iconRight = itemView.right - margin
-                        deleteIcon.setBounds(
-                            iconRight - deleteIcon.intrinsicWidth,
-                            iconTop,
-                            iconRight,
-                            iconTop + deleteIcon.intrinsicHeight
-                        )
-                        c.save()
-                        c.clipRect(deleteBackground.bounds)
-                        deleteIcon.draw(c)
-                        c.restore()
+                        if (-dX > deleteIcon.intrinsicWidth + margin * 2) {
+                            val iconTop = itemView.top + margin
+                            val iconRight = itemView.right - margin
+                            deleteIcon.setBounds(
+                                iconRight - deleteIcon.intrinsicWidth,
+                                iconTop,
+                                iconRight,
+                                iconTop + deleteIcon.intrinsicHeight
+                            )
+                            deleteIcon.draw(c)
+                        }
                     }
                 }
                 super.onChildDraw(
