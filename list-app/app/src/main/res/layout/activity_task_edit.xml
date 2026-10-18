@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -17,9 +18,9 @@
 
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            style="@style/Widget.ListApp.IconButton"
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
             android:contentDescription="@string/back"
             android:src="@drawable/ic_arrow_back" />
 
@@ -30,7 +31,7 @@
 
         <Button
             android:id="@+id/doneButton"
-            style="@style/Widget.Material3.Button.TextButton"
+            style="@style/Widget.ListApp.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/done" />
@@ -46,24 +47,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/screen_margin">
 
             <EditText
                 android:id="@+id/titleInput"
+                style="@style/Widget.ListApp.TitleInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/title_hint"
                 android:importantForAutofill="no"
-                android:inputType="textCapSentences"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:inputType="textCapSentences" />
 
             <EditText
                 android:id="@+id/noteInput"
+                style="@style/Widget.ListApp.NoteInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="top"
                 android:hint="@string/note_hint"
                 android:importantForAutofill="no"
                 android:inputType="textCapSentences|textMultiLine"
@@ -80,34 +79,34 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:minHeight="56dp"
+                    android:minHeight="@dimen/row_height"
                     android:orientation="horizontal"
-                    android:paddingStart="16dp"
+                    android:paddingStart="@dimen/screen_margin"
                     android:paddingEnd="4dp">
 
                     <TextView
+                        style="@style/Widget.ListApp.RowText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/deadline"
-                        android:textSize="17sp" />
+                        android:text="@string/deadline" />
 
                     <TextView
                         android:id="@+id/deadlineText"
+                        style="@style/Widget.ListApp.RowValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="12dp"
-                        android:textColor="@color/gray"
-                        android:textSize="17sp" />
+                        android:layout_marginEnd="12dp" />
 
                     <ImageButton
                         android:id="@+id/clearDeadlineButton"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
+                        style="@style/Widget.ListApp.IconButton"
+                        android:layout_width="@dimen/icon_button_size"
+                        android:layout_height="@dimen/icon_button_size"
                         android:contentDescription="@string/remove_deadline"
                         android:src="@drawable/ic_close"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        app:tint="@color/gray" />
 
                 </LinearLayout>
 
@@ -115,12 +114,11 @@
 
             <Button
                 android:id="@+id/deleteButton"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.ListApp.DeleteButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/delete_task"
-                android:textColor="@color/red"
                 android:visibility="gone" />
 
         </LinearLayout>
