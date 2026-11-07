@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="taskCardColor" format="color|reference" />
+    <attr name="searchFieldColor" format="color|reference" />
+    <attr name="separatorLineColor" format="color|reference" />
+</resources>

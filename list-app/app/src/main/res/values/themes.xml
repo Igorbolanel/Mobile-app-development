@@ -1,9 +1,27 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<resources>
     <style name="Base.Theme.ListApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/yellow_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimaryContainer">@color/black</item>
+        <item name="colorPrimaryInverse">@color/yellow</item>
+        <item name="colorSecondary">@color/yellow_dark</item>
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorOnBackground">@color/black</item>
+        <item name="colorSurface">@color/card_light</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorOnSurfaceVariant">@color/gray</item>
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="taskCardColor">@color/card_light</item>
+        <item name="searchFieldColor">@color/search_light</item>
+        <item name="separatorLineColor">@color/separator_light</item>
     </style>
 
-    <style name="Theme.ListApp" parent="Base.Theme.ListApp" />
+    <style name="Theme.ListApp" parent="Base.Theme.ListApp">
+        <item name="materialCardViewStyle">@style/Widget.ListApp.Card</item>
+        <item name="materialDividerStyle">@style/Widget.ListApp.Divider</item>
+        <item name="floatingActionButtonStyle">@style/Widget.ListApp.AddButton</item>
+        <item name="android:windowAnimationStyle">@style/Animation.ListApp.Activity</item>
+    </style>
 </resources>

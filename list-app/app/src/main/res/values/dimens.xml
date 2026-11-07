@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_margin">16dp</dimen>
+    <dimen name="corner_radius">12dp</dimen>
+    <dimen name="search_corner_radius">10dp</dimen>
+    <dimen name="search_height">40dp</dimen>
+    <dimen name="row_height">52dp</dimen>
+    <dimen name="icon_button_size">48dp</dimen>
+    <dimen name="divider_inset">56dp</dimen>
+    <dimen name="text_large_title">34sp</dimen>
+    <dimen name="text_note_title">28sp</dimen>
+    <dimen name="text_body">17sp</dimen>
+    <dimen name="text_caption">13sp</dimen>
+</resources>
